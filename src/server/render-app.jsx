@@ -31,11 +31,34 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
       <head>
         ${head.title}
         ${head.meta}
+                <style>
+            html,
+            body,
+            div,
+            ul,
+            li,
+            fieldset {
+              margin: 0;
+              padding: 0;
+              border: 0;
+              font: 14px 'Roboto', sans-serif;
+              font-size: 100%;
+              vertical-align: baseline;
+              outline: 0
+          }
+          h2 {
+            color: white !important;
+          }
+          a {
+            background: transparent;
+            text-decoration: none;
+          }
+        </style>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=no">
         <link rel="stylesheet" href="${STATIC_PATH}/css/bootstrap.min.css">
         <style class="${JSS_SSR_CLASS}">${sheets.toString()}</style>
       </head>
-      <body>
+      <body background="/static/img/background.jpg">
         <div class="${APP_CONTAINER_CLASS}">${appHtml}</div>
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}

@@ -21,7 +21,6 @@ const App = () =>
       <Route exact path={HOME_PAGE_ROUTE} render={() => <HomePage />} />
       <Route component={NotFoundPage} />
     </Switch>
-    <Footer />
   </div>
 
 export default App
