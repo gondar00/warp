@@ -13,7 +13,8 @@ export default {
     fontSize: '13px',
   },
   error: {
-    color: '#c30',
+    color: '#fff',
+    textTransform: 'capitalize',
     padding: '3px 0 0 10px',
     margin: '0 0 9px',
   },

@@ -4,6 +4,7 @@ import injectSheet from 'react-jss'
 import classNames from 'classnames'
 import React from 'react'
 import styles from '../styles/input'
+import { isEmpty } from '../lib/validation'
 
 type Props = {
   classes: Object,
@@ -15,8 +16,9 @@ type Props = {
   placeholder: string,
   shouldAutocomplete: boolean,
   isDisabled: boolean,
-  onChange: Function,
-}
+  meta: Object,
+  onChange: Function
+};
 
 const Input = ({
   classes,
@@ -28,6 +30,7 @@ const Input = ({
   placeholder,
   shouldAutocomplete,
   isDisabled,
+  meta,
   onChange,
 }: Props) => (
   <div>
@@ -45,6 +48,11 @@ const Input = ({
       autoComplete={shouldAutocomplete ? null : 'off'}
       disabled={isDisabled ? 'disabled' : ''}
     />
+    {!isEmpty(meta)
+      ? <p className={classes.error}>
+        {meta.touched && (meta.error && <span>{meta.error}</span>)}
+      </p>
+      : null}
   </div>
 )
 

@@ -46,7 +46,7 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
               vertical-align: baseline;
               outline: 0
           }
-          h2 {
+          body {
             color: white !important;
           }
           a {
