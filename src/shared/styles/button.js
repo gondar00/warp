@@ -1,5 +1,9 @@
 export default {
   button: {
+    '&:hover': {
+      textDecoration: 'none',
+      cursor: 'pointer',
+    },
     color: '#fff',
     backgroundColor: '#c30',
     fontSize: '13px',

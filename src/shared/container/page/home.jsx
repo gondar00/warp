@@ -8,7 +8,8 @@ import { Field, reduxForm } from 'redux-form'
 import classNames from 'classnames'
 import Input from '../../component/input'
 import Button from '../../component/button'
-import { required, email } from '../../lib/validation'
+import { required } from '../../lib/validation'
+import { getRestaurants } from '../../action/home'
 
 import { APP_NAME } from '../../config'
 
@@ -31,21 +32,29 @@ const styles = {
 
 type Props = {
   classes: Object,
+  history: Object,
   handleSubmit: Function,
-  onFindClicked: Function,
-}
-
-const mapDispatchToProps = dispatch => ({
-  onFindClicked: (values) => {
-    console.log('gg', values)
-  },
-})
+};
 
 class HomePage extends Component {
-  onComponentDidMount() {}
-  props: Props
+  constructor(props) {
+    super(props)
+    this.onFindClicked = this.onFindClicked.bind(this)
+  }
+  onFindClicked(values) {
+    const { history } = this.props
+    history.push({
+      pathname: '/restaurants',
+      search: '?lat=37.767413217936834&long=-122.42820739746094',
+    })
+  }
+  props: Props;
   render() {
-    const { classes, handleSubmit, onFindClicked } = this.props
+    const {
+      classes,
+      handleSubmit,
+    } = this.props
+
     return (
       <div>
         <Helmet
@@ -58,7 +67,11 @@ class HomePage extends Component {
           <div className={classes.middle}>
             <h2 className={classes.h2}>{APP_NAME}</h2>
             <div className="container">
-              <form className="row" onSubmit={handleSubmit(onFindClicked)} noValidate>
+              <form
+                className="row"
+                onSubmit={handleSubmit(this.onFindClicked)}
+                noValidate
+              >
                 <div className="col-md-4 text-center">
                   <Field
                     className="form-control"
@@ -72,9 +85,9 @@ class HomePage extends Component {
                 <div className="col-md-4 text-center">
                   <Field
                     className="form-control"
-                    name="restuarant"
+                    name="restaurant"
                     type="text"
-                    placeholder="Search for restuarants..."
+                    placeholder="Search for restaurants..."
                     component={Input}
                     validate={required}
                   />
@@ -93,7 +106,7 @@ class HomePage extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(
+export default connect(null, null)(
   reduxForm({
     form: 'searchForm',
   })(injectSheet(styles)(HomePage)),

@@ -27,6 +27,10 @@ app.use(compression())
 app.use(STATIC_PATH, express.static('dist'))
 app.use(STATIC_PATH, express.static('public'))
 
+//
+// Wrap -> Yelp Apis
+// -----------------------------------------------------------------------------
+
 app.get('/v1/yelp/getAuth', (req, res) => {
   const form = {
     grant_type: 'client_credentials',
@@ -42,7 +46,36 @@ app.get('/v1/yelp/getAuth', (req, res) => {
     },
   )
 })
+
+app.get('/v1/yelp/getRestaurants', (req, res) => {
+  const qs = {
+    latitude: req.query.latitude,
+    longitude: req.query.longitude,
+  }
+  request.get(
+    {
+      url: `${API_OPTIONS.yelpOrigin}/v3/businesses/search`,
+      qs,
+      headers: {
+        Authorization: req.headers.authorization,
+      },
+    },
+    (err, httpResponse, body) => {
+      if (err) throw new Error('Bad response from server')
+      return res.json(JSON.parse(body))
+    },
+  )
+})
+
+//
+// SSR
+// -----------------------------------------------------------------------------
+
 routing(app)
+
+//
+//  Start the server
+// -----------------------------------------------------------------------------
 
 http.listen(WEB_PORT, () => {
   // eslint-disable-next-line no-console

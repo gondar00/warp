@@ -26,7 +26,7 @@ export const IO_SERVER_HELLO = 'IO_SERVER_HELLO'
 
 
 export const API_OPTIONS = {
-  clientOrigin: `${WEB_PROTOCOL}://${WEB_HOST}:${WEB_PORT}`,
+  clientOrigin: `${WEB_HOST}:${WEB_PORT}`,
   yelpOrigin: 'https://api.yelp.com',
 }
 
@@ -40,5 +40,6 @@ export const ERROR_MESSAGES = {
 export const API_ENDPOINTS = {
   endpoints: new Map([
     ['getYelpAuthToken', '/v1/yelp/getAuth'],
+    ['getRestaurants', '/v1/yelp/getRestaurants'],
   ]),
 }

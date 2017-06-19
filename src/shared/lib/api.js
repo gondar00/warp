@@ -17,6 +17,7 @@ import {
   API_OPTIONS,
 } from '../config'
 
+import { token } from '../util'
 // TODO: this is used to prevent the error that absolute urls are not supported
 const HOSTNAME = API_OPTIONS.clientOrigin
 // Config
@@ -99,14 +100,17 @@ function fetcher(method, inputEndpoint, inputParams, body) {
 
     if (!method || !endpoint) return reject('Missing params (AppAPI.fetcher).')
 
+    const headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'User-Agent': `${APP_NAME}`,
+    }
     // Build request
     const req = {
       method: method.toUpperCase(),
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'User-Agent': `${APP_NAME}`,
-      },
+      headers: token
+        ? { ...headers, 'Authorization': `Bearer ${token}` }
+        : headers,
     }
 
     // Add Endpoint Params

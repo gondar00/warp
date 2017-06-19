@@ -1,0 +1,40 @@
+export default {
+  overlay: {
+    position: 'absolute',
+    top: '10px',
+    left: '10px',
+    right: '10px',
+    bottom: '10px',
+    background: '#000000',
+    opacity: 0.5,
+    transition: 'all 200ms ease-out',
+  },
+  text: {
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    lineHeight: 'normal',
+    margin: '0 20px',
+    position: 'relative',
+    zIndex: 2,
+    transition: 'all 200ms ease-out',
+  },
+  h2: {
+    fontSize: '18px',
+    color: '#FFFFFF',
+    marginTop: '5px',
+  },
+  bg: {
+    position: 'absolute',
+    top: '10px',
+    left: '10px',
+    right: '10px',
+    bottom: '10px',
+    backgroundSize: 'cover',
+    transition: 'all 200ms ease-out',
+  },
+  restaurantHolder: {
+    lineHeight: '200px',
+    marginBottom: '15px',
+    boxShadow: '0px 2px 4px 0px rgba(174,174,174,0.24)',
+  },
+}

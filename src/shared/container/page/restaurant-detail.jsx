@@ -30,7 +30,7 @@ type Props = {
 //   },
 // })
 
-class RestuarantDetail extends Component {
+class RestaurantDetail extends Component {
   onComponentDidMount() {}
   props: Props;
   render() {
@@ -51,4 +51,4 @@ class RestuarantDetail extends Component {
   }
 }
 
-export default connect(null, null)(injectSheet(styles)(RestuarantDetail))
+export default connect(null, null)(injectSheet(styles)(RestaurantDetail))
