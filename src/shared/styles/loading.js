@@ -6,7 +6,7 @@ export default {
   loadingSpinner: {
     display: 'block',
     margin: '0 auto',
-    fill: '#fff',
+    fill: '#000',
   },
   circle: {
     animationName: 'upAndDown',

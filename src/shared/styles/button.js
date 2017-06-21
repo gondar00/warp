@@ -1,5 +1,8 @@
 export default {
   button: {
+    '&:focus': {
+      outline: 'none',
+    },
     '&:hover': {
       textDecoration: 'none',
       cursor: 'pointer',

@@ -47,7 +47,7 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
               outline: 0
           }
           body {
-            color: white !important;
+            color: black !important;
           }
           a {
             background: transparent;
@@ -58,7 +58,7 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
         <link rel="stylesheet" href="${STATIC_PATH}/css/bootstrap.min.css">
         <style class="${JSS_SSR_CLASS}">${sheets.toString()}</style>
       </head>
-      <body background="/static/img/background.jpg">
+      <body>
         <div class="${APP_CONTAINER_CLASS}">${appHtml}</div>
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}

@@ -41,5 +41,7 @@ export const API_ENDPOINTS = {
   endpoints: new Map([
     ['getYelpAuthToken', '/v1/yelp/getAuth'],
     ['getRestaurants', '/v1/yelp/getRestaurants'],
+    ['getRestaurantDetail', '/v1/yelp/getRestaurantDetail'],
+    ['getRestaurantReviews', '/v1/yelp/getRestaurantReviews'],
   ]),
 }

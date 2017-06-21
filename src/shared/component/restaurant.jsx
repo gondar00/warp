@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import injectSheet from 'react-jss'
 
@@ -12,8 +13,12 @@ type Props = {
 };
 
 const getUrl = url => `url(${url})`
+const getLink = id => `/restaurant/${id}`
 const Restaurant = ({ classes, restaurant }: Props) => (
-  <div className={classNames(classes.restaurantHolder, 'col-md-4')}>
+  <Link
+    to={getLink(restaurant.get('id'))}
+    className={classNames(classes.restaurantHolder, 'col-md-4')}
+  >
     <div
       className={classes.bg}
       style={{
@@ -26,7 +31,7 @@ const Restaurant = ({ classes, restaurant }: Props) => (
         {restaurant.get('name')}
       </h2>
     </div>
-  </div>
+  </Link>
 )
 
 export default injectSheet(styles)(Restaurant)

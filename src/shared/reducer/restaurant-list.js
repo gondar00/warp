@@ -6,11 +6,11 @@ import {
   RESTAURANT_LIST_REQUEST,
   RESTAURANT_LIST_SUCCESS,
   RESTAURANT_LIST_FAILURE,
-} from '../action/home'
+} from '../action/restaurant-list'
 
 const initialState = fromJS({ isFetching: false, restaurants: [] })
 
-const homeReducer = (
+const restaurantList = (
   state = initialState,
   action: { type: string, payload: any },
 ) => {
@@ -26,4 +26,4 @@ const homeReducer = (
   }
 }
 
-export default homeReducer
+export default restaurantList

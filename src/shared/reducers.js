@@ -5,6 +5,7 @@ import { reducer as form } from 'redux-form'
 // TODO: instead of loading all reducers individually make an index.js file that passes all
 import home from './reducer/home'
 import restaurantList from './reducer/restaurant-list'
+import restaurantDetail from './reducer/restaurant-detail'
 
 /* eslint-disable */
 export const reducers = {
@@ -12,5 +13,6 @@ export const reducers = {
   form,
   home,
   restaurantList,
+  restaurantDetail,
 }
 /* eslint-enable */

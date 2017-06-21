@@ -67,6 +67,37 @@ app.get('/v1/yelp/getRestaurants', (req, res) => {
   )
 })
 
+app.get('/v1/yelp/getRestaurantDetail', (req, res) => {
+  const id = req.query.id
+  request.get(
+    {
+      url: `${API_OPTIONS.yelpOrigin}/v3/businesses/${id}`,
+      headers: {
+        Authorization: req.headers.authorization,
+      },
+    },
+    (err, httpResponse, body) => {
+      if (err) throw new Error('Bad response from server')
+      return res.json(JSON.parse(body))
+    },
+  )
+})
+
+app.get('/v1/yelp/getRestaurantReviews', (req, res) => {
+  const id = req.query.id
+  request.get(
+    {
+      url: `${API_OPTIONS.yelpOrigin}/v3/businesses/${id}/reviews`,
+      headers: {
+        Authorization: req.headers.authorization,
+      },
+    },
+    (err, httpResponse, body) => {
+      if (err) throw new Error('Bad response from server')
+      return res.json(JSON.parse(body))
+    },
+  )
+})
 //
 // SSR
 // -----------------------------------------------------------------------------

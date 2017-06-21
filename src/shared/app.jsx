@@ -24,7 +24,7 @@ const App = () =>
     <Switch>
       <Route exact path={HOME_PAGE_ROUTE} render={props => <HomePage {...props} />} />
       <Route path={RESTAURANT_LIST_ROUTE} render={props => <RestaurantListPage {...props} />} />
-      <Route exact path={RESTAURANT_DETAIL_ROUTE} render={() => <RestaurantDetailPage />} />
+      <Route exact path={RESTAURANT_DETAIL_ROUTE} render={props => <RestaurantDetailPage {...props} />} />
       <Route component={NotFoundPage} />
     </Switch>
   </div>
