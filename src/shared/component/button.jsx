@@ -2,15 +2,15 @@
 
 import injectSheet from 'react-jss'
 import classNames from 'classnames'
-import React, { PropTypes } from 'react'
+import React from 'react'
 import styles from '../styles/button'
 
 type Props = {
-  classes: PropTypes.Object,
-  className: PropTypes.string,
-  text: PropTypes.string,
-  type: PropTypes.string,
-  onClick: PropTypes.func
+  classes: Object,
+  className: string,
+  text: string,
+  type: string,
+  onClick: Function
 };
 
 const Button = (
@@ -32,10 +32,5 @@ const Button = (
     {text}
   </button>
 )
-
-Button.defaultPropTypes = {
-  type: 'submit',
-  enabled: true,
-}
 
 export default injectSheet(styles)(Button)

@@ -3,7 +3,6 @@
 import { routerReducer as router } from 'react-router-redux'
 import { reducer as form } from 'redux-form'
 // TODO: instead of loading all reducers individually make an index.js file that passes all
-import home from './reducer/home'
 import restaurantList from './reducer/restaurant-list'
 import restaurantDetail from './reducer/restaurant-detail'
 
@@ -11,7 +10,6 @@ import restaurantDetail from './reducer/restaurant-detail'
 export const reducers = {
   router,
   form,
-  home,
   restaurantList,
   restaurantDetail,
 }

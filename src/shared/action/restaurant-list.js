@@ -1,7 +1,6 @@
 // @flow
 
 import { createAction } from 'redux-actions'
-import { getYelpAuthToken } from './home'
 import ApiRequest from '../lib/api'
 import Storage from '../lib/storage'
 import { isEmpty } from '../lib/validation'
@@ -13,6 +12,11 @@ export const RESTAURANT_LIST_FAILURE = 'RESTAURANT_LIST_FAILURE'
 const restaurantListRequest = createAction(RESTAURANT_LIST_REQUEST)
 const restaurantListSuccess = createAction(RESTAURANT_LIST_SUCCESS)
 const restaurantListFailure = createAction(RESTAURANT_LIST_FAILURE)
+
+export const getYelpAuthToken = async () => {
+  const auth = await ApiRequest.getYelpAuthToken.get()
+  Storage.set('y_a', auth.access_token)
+}
 
 const getAllRestaurants = async (params) => {
   const yelpAuthToken = Storage.get('y_a')

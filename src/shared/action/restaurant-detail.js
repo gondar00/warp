@@ -1,7 +1,7 @@
 // @flow
 
 import { createAction } from 'redux-actions'
-import { getYelpAuthToken } from './home'
+import { getYelpAuthToken } from './restaurant-list'
 import ApiRequest from '../lib/api'
 import Storage from '../lib/storage'
 import { isEmpty } from '../lib/validation'

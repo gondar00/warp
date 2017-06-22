@@ -14,6 +14,7 @@ export const WEB_PROTOCOL = process.env.HTTPS === 'true' ? 'https' : 'http'
 export const WEB_HOST = process.env.WEB_HOST || 'http://localhost'
 export const WEB_PORT = process.env.WEB_PORT || 8000
 
+// My API client secret is on github. TODO: FIX
 export const YELP_CLIENT_ID = process.env.YELP_CLIENT_ID ||
   'GjM446MEYbhgdWyOA-1cGQ'
 export const YELP_CLIENT_SECRET = process.env.YELP_CLIENT_SECRET || 'D1UekwsKDNcG9DbpKW6DGTfuQflA2mDZnytGqHP1YmzGoVpjzYqsKMvclYQJhv2p'

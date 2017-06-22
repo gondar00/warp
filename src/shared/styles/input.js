@@ -6,7 +6,7 @@ export default {
     },
     background: '#fff !important',
     border: 'none',
-    borderBottom: '1px solid #000',
+    borderBottom: '1px solid #ddd',
     borderRadius: '0px',
     padding: '10px 0px',
     width: '100%',
