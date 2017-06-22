@@ -26,7 +26,7 @@ yarn prod:start
 
 ## Deploying to HEROKU
 - We are going to use heroku pipeline deployments
-- Go to heroku dashboard and create two apps `wrap-app` and `wrap-app-staging`
+- Go to heroku dashboard and create two apps `warp-app` and `warp-app-staging`
 - In both apps , under Settings > Config Variables, add `NPM_CONFIG_PRODUCTION` set to `false`
 - Create a Pipeline, and grant Heroku access to your Github
 - Add both apps to the pipeline, make the staging one auto-deploy on changes in master, and enable Review Apps
