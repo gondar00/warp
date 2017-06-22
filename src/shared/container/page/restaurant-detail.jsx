@@ -1,5 +1,6 @@
 // @flow
 
+import $ from 'jquery'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Helmet from 'react-helmet'
@@ -11,9 +12,9 @@ import Loading from '../../component/loading'
 import Input from '../../component/input'
 import Button from '../../component/button'
 import Rating from '../../component/rating'
-import { required } from '../../lib/validation'
+import { required, integer } from '../../lib/validation'
 import { APP_NAME } from '../../config'
-import { getRestaurant } from '../../action/restaurant-detail'
+import { getRestaurant, addReview } from '../../action/restaurant-detail'
 
 const styles = {
   pt15: {
@@ -26,6 +27,9 @@ const styles = {
     fontWeight: '100',
     textTransform: 'uppercase',
     color: '#333',
+  },
+  hide: {
+    display: 'none !important',
   },
   icon: {
     textAlign: 'center',
@@ -75,7 +79,9 @@ type Props = {
   isFetching: Boolean,
   classes: Object,
   history: Object,
+  addNewReview: Function,
   fetchRestaurant: Function,
+  handleSubmit: Function,
   restaurantData: Immutable.List,
   restaurantReviews: Immutable.List
 };
@@ -117,12 +123,18 @@ const yelpReviews = (classes, review) => (
     </div>
   </div>
 )
-const reviewForm = classes => (
-  <form className="form form-inline" style={{ width: '100%' }} noValidate>
+const reviewForm = (classes, addNewReview, handleSubmit) => (
+  <form
+    id="reviewForm"
+    onSubmit={handleSubmit(addNewReview)}
+    className="form form-inline"
+    style={{ width: '100%', margin: '10px' }}
+    noValidate
+  >
     <div className="col-md-4 form-group">
       <Field
         className="form-control"
-        name="Name"
+        name="name"
         type="text"
         placeholder="Name"
         component={Input}
@@ -130,9 +142,16 @@ const reviewForm = classes => (
       />
     </div>
     <div
-      className={classNames(classes.pt15, 'col-md-4 text-center form-group')}
+      className={classNames(classes.pt15, 'col-md-4 form-group')}
     >
-      <Rating />
+      <Field
+        className="form-control"
+        name="rating"
+        type="text"
+        placeholder="Enter a number from 1-5"
+        component={Input}
+        validate={[required, integer]}
+      />
     </div>
     <div className="col-md-4 form-group">
       <Field
@@ -144,6 +163,11 @@ const reviewForm = classes => (
         validate={required}
       />
     </div>
+      <Button
+        text='Submit Review'
+        type="submit"
+        className={classes.reviewButton}
+      />
   </form>
 )
 const mapStateToProps = state => ({
@@ -153,6 +177,7 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = dispatch => ({
   fetchRestaurant: id => dispatch(getRestaurant(id)),
+  addNewReview: values => dispatch(addReview(values)),
 })
 
 class RestaurantDetail extends Component {
@@ -179,8 +204,10 @@ class RestaurantDetail extends Component {
     const {
       isFetching,
       classes,
+      handleSubmit,
       restaurantData,
       restaurantReviews,
+      addNewReview,
     } = this.props
     if (isFetching) return <Loading />
     const { showReviewForm } = this.state
@@ -240,14 +267,15 @@ class RestaurantDetail extends Component {
               </h2>
             <div className="row" style={{ marginBottom: '30px' }}>
               {showReviewForm
-                  ? reviewForm(classes)
+                  ? reviewForm(classes, addNewReview, handleSubmit)
                   : restaurantReviews.map(review =>
                       yelpReviews(classes, review),
                     )}
             </div>
             <Button
               text={showReviewForm ? 'Submit Review' : 'Write a review'}
-              className={classes.reviewButton}
+              type="submit"
+              className={showReviewForm ? classes.hide : classes.reviewButton}
               onClick={() => this.onWriteReview()}
             />
             <hr className={classes.dotted} />
@@ -278,6 +306,6 @@ class RestaurantDetail extends Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   reduxForm({
-    form: 'searchForm',
+    form: 'restaurantDetail',
   })(injectSheet(styles)(RestaurantDetail)),
 )

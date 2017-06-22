@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable */
 
 export const isEmpty = value => value === undefined || value === null || value === ''
 
@@ -14,5 +15,11 @@ export function email(value) {
 export function required(value) {
   if (isEmpty(value)) {
     return 'Required'
+  }
+}
+
+export function integer(value) {
+  if (!Number.isInteger(Number(value))) {
+    return 'Must be an integer';
   }
 }

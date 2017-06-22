@@ -25,6 +25,14 @@ const getAllRestaurantInfo = async (id) => {
   const restaurantDetail = await ApiRequest.getRestaurantDetail.get(id)
   const restaurantReviews = await ApiRequest.getRestaurantReviews.get(id)
   if (!isEmpty(restaurantDetail) && restaurantReviews.reviews.length > 0) {
+    Storage.set(
+      'restaurantDetail',
+      JSON.stringify({
+        data: restaurantDetail,
+        reviews: restaurantReviews.reviews,
+      }),
+    )
+
     return Promise.resolve({
       data: restaurantDetail,
       reviews: restaurantReviews.reviews,
@@ -39,6 +47,35 @@ export function getRestaurant(id) {
   return (dispatch) => {
     dispatch(restaurantDetailRequest())
     return getAllRestaurantInfo(id).then(
+      (data) => {
+        dispatch(restaurantDetailSuccess(data))
+      },
+      (err) => {
+        dispatch(restaurantDetailFailure(err))
+      },
+    )
+  }
+}
+
+const addReviewToLS = (newReview) => {
+  const review = {
+    text: newReview.comments,
+    rating: newReview.rating,
+    time_created: new Date().toString(),
+    user: {
+      name: newReview.name,
+    },
+  }
+  const restaurantDetail = JSON.parse(Storage.get('restaurantDetail'))
+  return Promise.resolve({
+    data: restaurantDetail.data,
+    reviews: [...restaurantDetail.reviews, review],
+  })
+}
+export function addReview(newReview) {
+  return (dispatch) => {
+    dispatch(restaurantDetailSuccess())
+    return addReviewToLS(newReview).then(
       (data) => {
         dispatch(restaurantDetailSuccess(data))
       },
